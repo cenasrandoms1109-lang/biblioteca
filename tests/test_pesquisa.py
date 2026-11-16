@@ -5,3 +5,11 @@ def find_titulo(titulo):
     # Lógica para buscar o título no banco de dados ou API
     # Retorna o título encontrado ou None se não encontrado
     pass
+
+def find_autor(autor):
+    """
+    Função para encontrar o autor de um livro.
+    """
+    # Lógica para buscar o autor no banco de dados ou API
+    # Retorna o autor encontrado ou None se não encontrado
+    pass
