@@ -21,4 +21,6 @@ def registar_livro(livros, livro):
 
     if not livro["titulo"]:
         raise ValueError("O título é obrigatório.")
+    if not livro["autor"]:
+        raise ValueError("O autor é obrigatório.")
     livros.append(livro)
