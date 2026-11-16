@@ -23,4 +23,8 @@ def registar_livro(livros, livro):
         raise ValueError("O título é obrigatório.")
     if not livro["autor"]:
         raise ValueError("O autor é obrigatório.")
+    
+    isbn = livro["isbn"].replace("-", "").replace(" ", "")
+    if not (isbn.isdigit() and len(isbn) in (10, 13)):
+        raise ValueError("O ISBN deve ter 10 ou 13 dígitos.")
     livros.append(livro)
