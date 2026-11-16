@@ -18,4 +18,7 @@ def registar_livro(livros, livro):
     :return: nada, o livro é acrescentado à lista recebida
     :rtype: None
     """
+
+    if not livro["titulo"]:
+        raise ValueError("O título é obrigatório.")
     livros.append(livro)
