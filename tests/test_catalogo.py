@@ -35,3 +35,8 @@ class  TestEditarLivro(unittest.TestCase):
         livros = self.criar_livros()
         editar_livro(livros, "9780306406157", {"titulo": "Novo Titulo"})
         self.assertEqual(livros[0]["titulo"], "Novo Titulo")
+
+    def test_isbn_inexistente(self):
+        livros = self.criar_livros()
+        with self.assertRaises(ValueError):
+            editar_livro(livros, "0000000000", {"titulo": "Novo"})
