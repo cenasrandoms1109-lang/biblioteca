@@ -47,9 +47,9 @@ def editar_livro(livros, isbn, novos_dados):
     if "autor" in novos_dados and not novos_dados["autor"]:
         raise ValueError("O autor é obrigatório!")
 
-    isbn = isbn.replace("-", "").replcae(" ", "")
+    isbn = isbn.replace("-", "").replace(" ", "")
 
-    for livros in livros:
+    for livro in livros:
         isbn_livro = livro["isbn"].replace("-", "").replace(" ", "")
         if isbn_livro == isbn:
             for campo in novos_dados:
