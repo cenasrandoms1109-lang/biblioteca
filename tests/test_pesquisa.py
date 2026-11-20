@@ -1,6 +1,6 @@
 import unittest
 
-from src.book import Livro
+from src.livro import Livro
 from src.pesquisa import search_by_author, search_by_title
 
 Livros = [
