@@ -7,7 +7,14 @@ Operações sobre o catálogo de livros (registar, editar e remover)
 """
 
 def limpar_isbn(isbn):
-    """Tira hífens e espaços do ISBN"""
+    """
+    Remove hífens e espaços de um ISBN
+
+    :param isbn: ISBN tal como foi escrito pelo utilizador
+    :type isbn: str
+    :return: ISBN só com dígitos
+    :rtype: str
+    """
     return isbn.replace("-", "").replace(" ", "")
 
 def registar_livro(livros, livro):
