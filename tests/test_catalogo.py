@@ -26,6 +26,7 @@ class TestRegistarLivro(unittest.TestCase):
         registar_livro(livros, {"titulo": "A", "autor": "B", "isbn": "9780306406157"})
         with self.assertRaises(ValueError):
             registar_livro(livros, {"titulo": "C", "autor": "D", "isbn": "9780306406157"})
+    
 
 
 
@@ -67,3 +68,8 @@ class TestRemoverLivro(unittest.TestCase):
 
     def test_remover_inexistente(self):
         self.assertFalse(remover_livro([], "9780306406157"))
+    
+    def test_remover_com_hifens(self):
+        livros = [{"titulo": "A", "autor": "B", "isbn": "9780306406157"}]
+        self.assertTrue(remover_livro(livros, "978-0-306-40615-7"))
+        self.assertEqual(len(livros), 0)
