@@ -38,3 +38,12 @@ def menu_stock_por_genero(catalogo):
         print("Sem livros no catálogo.")
     for genero, total in totais.items():
         print(f"{genero}: {total}")
+
+def menu_generos_livro(catalogo):
+    """Pede um ISBN e mostra os géneros desse livro."""
+    isbn = input("ISBN do livro: ")
+    try:
+        generos = generos_do_livro(catalogo, isbn)
+        print("Géneros: " + ", ".join(generos))
+    except ValueError as erro:
+        print(f"Erro: {erro}")
