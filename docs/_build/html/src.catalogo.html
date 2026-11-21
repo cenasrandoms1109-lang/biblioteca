@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="pt" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.catalogo module &#8212; Documentação Biblioteca </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=103ffe9a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=beaedd51"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Pesquisar" href="search.html" />
+    <link rel="next" title="src.livro module" href="src.livro.html" />
+    <link rel="prev" title="src package" href="src.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-src.catalogo">
+<span id="src-catalogo-module"></span><h1>src.catalogo module<a class="headerlink" href="#module-src.catalogo" title="Link to this heading">¶</a></h1>
+<p>Operações sobre o catálogo de livros (registar, editar e remover)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Date<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 Novembro 2026</p>
+</dd>
+<dt class="field-even">Version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.1</p>
+</dd>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
+<dd class="field-odd"><p>João Pedro Balbino, Gonçalo Losada</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.editar_livro">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">editar_livro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isbn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novos_dados</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#editar_livro"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.editar_livro" title="Link to this definition">¶</a></dt>
+<dd><p>Edita os dados de um livro já registado no sistema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>livros</strong> (<em>list</em>) – lista com todos os livros registados</p></li>
+<li><p><strong>isbn</strong> (<em>str</em>) – ISBN do livro</p></li>
+<li><p><strong>novos_dados</strong> (<em>dict</em>) – campos a alterar</p></li>
+</ul>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – se o livro não existir</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.limpar_isbn">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">limpar_isbn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isbn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#limpar_isbn"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.limpar_isbn" title="Link to this definition">¶</a></dt>
+<dd><p>Remove hífens e espaços de um ISBN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>isbn</strong> (<em>str</em>) – ISBN tal como foi escrito pelo utilizador</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>ISBN só com dígitos</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.menu_editar">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">menu_editar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#menu_editar"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.menu_editar" title="Link to this definition">¶</a></dt>
+<dd><p>Pede o ISBN do livro e insere os novos dados do mesmo atualizados(os campos deixados vazios não são alterados)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>livros</strong> (<em>list</em>) – lista de livros do catálogo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.menu_registar">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">menu_registar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#menu_registar"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.menu_registar" title="Link to this definition">¶</a></dt>
+<dd><p>Pede os dados ao utilizador e regista um livro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>livros</strong> (<em>list</em>) – lista de livros do catálogo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.menu_remover">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">menu_remover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#menu_remover"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.menu_remover" title="Link to this definition">¶</a></dt>
+<dd><p>Pede o ISBN ao utilizador e remove o livro correspondente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>livros</strong> (<em>list</em>) – lista de livros do catálogo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.registar_livro">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">registar_livro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">livro</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#registar_livro"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.registar_livro" title="Link to this definition">¶</a></dt>
+<dd><p>Regista um novo livro no catálogo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>livros</strong> (<em>list</em>) – lista com todos os livros já registados</p></li>
+<li><p><strong>livro</strong> (<em>dict</em>) – dicionário com os dados do livro a registar</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>nada, o livro é acrescentado à lista recebida</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.catalogo.remover_livro">
+<span class="sig-prename descclassname"><span class="pre">src.catalogo.</span></span><span class="sig-name descname"><span class="pre">remover_livro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">livros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isbn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/catalogo.html#remover_livro"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#src.catalogo.remover_livro" title="Link to this definition">¶</a></dt>
+<dd><p>Remove um livro do catálogo através do ISBN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>livros</strong> (<em>list</em>) – lista com todos os livros registados</p></li>
+<li><p><strong>isbn</strong> (<em>str</em>) – ISBN do livro a remover</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>True se o livro foi removido, False se não foi encontrado</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Biblioteca</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
+<p class="caption" role="heading"><span class="caption-text">Conteúdo:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">biblioteca</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.catalogo module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.livro.html">src.livro module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.menu.html">src.menu module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.pesquisa.html">src.pesquisa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.stock.html">src.stock module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">biblioteca</a><ul>
+  <li><a href="src.html">src package</a><ul>
+      <li>Previous: <a href="src.html" title="capítulo anterior">src package</a></li>
+      <li>Next: <a href="src.livro.html" title="próximo capítulo">src.livro module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, João Pedro Balbino, Gonçalo Losada, Diogo Caetano, Kristian Saraiva.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/src.catalogo.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
