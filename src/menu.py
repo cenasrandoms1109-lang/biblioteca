@@ -94,6 +94,8 @@ def executar_menu(catalogo):
             menu_stock_por_genero(catalogo)
         elif opcao == "8":
             menu_generos_livro(catalogo)
+        elif opcao == "9":
+            menu_listar_livros(catalogo)
         elif opcao == "0":
             break
         else:
