@@ -117,6 +117,17 @@ def menu_editar(livros):
         print(f"Erro: {erro}")
   
 def remover_livro(livros, isbn):
+    """
+    Remove um livro do catálogo através do ISBN
+
+    :param livros: lista com todos os livros registados
+    :type livros: list
+    :param isbn: ISBN do livro a remover
+    :type isbn: str
+    :return: True se o livro foi removido, False se não foi encontrado
+    :rtype: bool
+    """
+    
     isbn = limpar_isbn(isbn)
     for livro in livros:
         if limpar_isbn(livro["isbn"]) == isbn:
