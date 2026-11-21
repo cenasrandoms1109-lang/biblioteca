@@ -60,3 +60,33 @@ def mostrar_menu():
     print("7. Stock por género")
     print("8. Géneros de um livro")
     print("0. Sair")
+
+def executar_menu(catalogo):
+    """Corre o menu até o utilizador escolher sair.
+
+    :param catalogo: lista de livros do catálogo
+    :type catalogo: list
+    """
+    while True:
+        mostrar_menu()
+        opcao = input("Opção: ")
+        if opcao == "1":
+            menu_registar(catalogo)
+        elif opcao == "2":
+            menu_editar(catalogo)
+        elif opcao == "3":
+            menu_remover(catalogo)
+        elif opcao == "4":
+            menu_pesquisar_titulo(catalogo)
+        elif opcao == "5":
+            menu_pesquisar_autor(catalogo)
+        elif opcao == "6":
+            menu_pesquisar_isbn(catalogo)
+        elif opcao == "7":
+            menu_stock_por_genero(catalogo)
+        elif opcao == "8":
+            menu_generos_livro(catalogo)
+        elif opcao == "0":
+            break
+        else:
+            print("Opção inválida.")
