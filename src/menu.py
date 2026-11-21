@@ -47,6 +47,13 @@ def menu_generos_livro(catalogo):
         print("Géneros: " + ", ".join(generos))
     except ValueError as erro:
         print(f"Erro: {erro}")
+
+def menu_listar_livros(catalogo):
+    """Mostra todos os livros do catálogo."""
+    if not catalogo:
+        print("Sem livros no catálogo.")
+    for livro in catalogo:
+        print(f"{livro['isbn']} | {livro['titulo']} - {livro['autor']}")
         
 def mostrar_menu():
     """Mostra as opções do menu."""
@@ -59,6 +66,7 @@ def mostrar_menu():
     print("6. Pesquisar por ISBN")
     print("7. Stock por género")
     print("8. Géneros de um livro")
+    print("9. Listar livros")
     print("0. Sair")
 
 def executar_menu(catalogo):
@@ -86,6 +94,8 @@ def executar_menu(catalogo):
             menu_stock_por_genero(catalogo)
         elif opcao == "8":
             menu_generos_livro(catalogo)
+        elif opcao == "9":
+            menu_listar_livros(catalogo)
         elif opcao == "0":
             break
         else:
