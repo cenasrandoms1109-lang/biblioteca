@@ -57,3 +57,9 @@ biblioteca/
 └── docs/                # documentação gerada
 ```
 
+## Equipa
+
+- Diogo Caetano
+- Gonçalo Losada
+- João Pedro Balbino
+- Kristian Saraiva
