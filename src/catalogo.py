@@ -3,9 +3,11 @@ Operações sobre o catálogo de livros (registar, editar e remover)
 
 :Date: 16 Novembro 2026
 :Version: 1.0
-:Authors: João Pedro Balbino
+:Authors: João Pedro Balbino, Gonçalo Losada
 """
 
+def limpar_isbn(isbn):
+    return isbn.replace("-", "").replace(" ", "")
 
 def registar_livro(livros, livro):
     """
@@ -27,6 +29,11 @@ def registar_livro(livros, livro):
     isbn = livro["isbn"].replace("-", "").replace(" ", "")
     if not (isbn.isdigit() and len(isbn) in (10, 13)):
         raise ValueError("O ISBN deve ter 10 ou 13 dígitos.")
+    
+    for l in livros:
+        if limpar_isbn(l["isbn"]) == isbn:
+            raise ValueError("Já existe um livro com esse ISBN.")
+        
     livros.append(livro)
 
 
@@ -99,3 +106,18 @@ def menu_editar(livros):
     except ValueError as erro:
         print(f"Erro: {erro}")
   
+  
+def remover_livro(livros, isbn):
+    for livro in livros:
+        if livro["isbn"] == isbn:
+            livros.remove(livro)
+            return True
+    return False
+
+
+def menu_remover(livros):
+    isbn = input("ISBN do livro a remover: ")
+    if remover_livro(livros, isbn):
+        print("Livro removido!")
+    else:
+        print("Erro: livro não encontrado.")
