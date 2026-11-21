@@ -58,4 +58,21 @@ def editar_livro(livros, isbn, novos_dados):
             return
 
     raise ValueError("Livro não foi encontrado!")
+
+
+def menu_registar(livros):
+    """Pede os dados ao utilizador e regista um livro
+
+    :param livros: lista de livros do catálogo
+    :type livros: list
+    """
+    titulo = input("Título: ")
+    autor = input("Autor: ")
+    isbn = input("ISBN: ")
+
+    try:
+        registar_livro(livros, {"titulo": titulo, "autor": autor, "isbn": isbn})
+        print("Livro registado!")
+    except ValueError as erro:
+        print(f"Erro: {erro}")
   
