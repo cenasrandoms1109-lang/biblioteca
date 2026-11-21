@@ -53,7 +53,7 @@ biblioteca/
 │   ├── armazenamento.py # guardar e carregar os dados em ficheiro
 │   └── menu.py          # menus da consola
 ├── tests/               # testes automáticos (unittest)
-├── data/                # ficheiros de dados
+├
 └── docs/                # documentação gerada
 ```
 

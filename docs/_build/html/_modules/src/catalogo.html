@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="pt" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.catalogo &#8212; Documentação Biblioteca </title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=103ffe9a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/translations.js?v=beaedd51"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fonte de src.catalogo</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">Operações sobre o catálogo de livros (registar, editar e remover)</span>
+
+<span class="sd">:Date: 16 Novembro 2026</span>
+<span class="sd">:Version: 1.1</span>
+<span class="sd">:Authors: João Pedro Balbino, Gonçalo Losada</span>
+<span class="sd">"""</span>
+
+<div class="viewcode-block" id="limpar_isbn">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.limpar_isbn">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">limpar_isbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove hífens e espaços de um ISBN</span>
+
+<span class="sd">    :param isbn: ISBN tal como foi escrito pelo utilizador</span>
+<span class="sd">    :type isbn: str</span>
+<span class="sd">    :return: ISBN só com dígitos</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">isbn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="registar_livro">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.registar_livro">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">registar_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="n">livro</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Regista um novo livro no catálogo</span>
+
+<span class="sd">    :param livros: lista com todos os livros já registados</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    :param livro: dicionário com os dados do livro a registar</span>
+<span class="sd">    :type livro: dict</span>
+<span class="sd">    :return: nada, o livro é acrescentado à lista recebida</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">livro</span><span class="p">[</span><span class="s2">"titulo"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"O título é obrigatório."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">livro</span><span class="p">[</span><span class="s2">"autor"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"O autor é obrigatório."</span><span class="p">)</span>
+    
+    <span class="n">isbn</span> <span class="o">=</span> <span class="n">livro</span><span class="p">[</span><span class="s2">"isbn"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">isbn</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"O ISBN deve ter 10 ou 13 dígitos."</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">livros</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">limpar_isbn</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="s2">"isbn"</span><span class="p">])</span> <span class="o">==</span> <span class="n">isbn</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Já existe um livro com esse ISBN."</span><span class="p">)</span>
+        
+    <span class="n">livros</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">livro</span><span class="p">)</span></div>
+
+    
+
+
+<div class="viewcode-block" id="editar_livro">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.editar_livro">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">editar_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">novos_dados</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Edita os dados de um livro já registado no sistema</span>
+
+<span class="sd">    :param livros: lista com todos os livros registados</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    :param isbn: ISBN do livro</span>
+<span class="sd">    :type isbn: str</span>
+<span class="sd">    :param novos_dados: campos a alterar </span>
+<span class="sd">    :type novos_dados: dict</span>
+<span class="sd">    :raises ValueError: se o livro não existir</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="s2">"titulo"</span> <span class="ow">in</span> <span class="n">novos_dados</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">novos_dados</span><span class="p">[</span><span class="s2">"titulo"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"O titulo é obrigatório!"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"autor"</span> <span class="ow">in</span> <span class="n">novos_dados</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">novos_dados</span><span class="p">[</span><span class="s2">"autor"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"O autor é obrigatório!"</span><span class="p">)</span>
+
+    <span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">livro</span> <span class="ow">in</span> <span class="n">livros</span><span class="p">:</span>
+        <span class="n">isbn_livro</span> <span class="o">=</span> <span class="n">livro</span><span class="p">[</span><span class="s2">"isbn"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isbn_livro</span> <span class="o">==</span> <span class="n">isbn</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="n">novos_dados</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">campo</span> <span class="o">!=</span> <span class="s2">"isbn"</span><span class="p">:</span>
+                    <span class="n">livro</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span> <span class="o">=</span> <span class="n">novos_dados</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+            <span class="k">return</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Livro não foi encontrado!"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="menu_registar">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.menu_registar">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">menu_registar</span><span class="p">(</span><span class="n">livros</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Pede os dados ao utilizador e regista um livro</span>
+
+<span class="sd">    :param livros: lista de livros do catálogo</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    """</span>
+    <span class="n">titulo</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Título: "</span><span class="p">)</span>
+    <span class="n">autor</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Autor: "</span><span class="p">)</span>
+    <span class="n">isbn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"ISBN: "</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">registar_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="p">{</span><span class="s2">"titulo"</span><span class="p">:</span> <span class="n">titulo</span><span class="p">,</span> <span class="s2">"autor"</span><span class="p">:</span> <span class="n">autor</span><span class="p">,</span> <span class="s2">"isbn"</span><span class="p">:</span> <span class="n">isbn</span><span class="p">})</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Livro registado!"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">erro</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Erro: </span><span class="si">{</span><span class="n">erro</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="menu_editar">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.menu_editar">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">menu_editar</span><span class="p">(</span><span class="n">livros</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Pede o ISBN do livro e insere os novos dados do mesmo atualizados(os campos deixados vazios não são alterados)</span>
+
+<span class="sd">    :param livros: lista de livros do catálogo</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    """</span>
+    <span class="n">isbn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"ISBN do livro a editar: "</span><span class="p">)</span>
+    <span class="n">titulo</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Novo título (Enter para manter): "</span><span class="p">)</span>
+    <span class="n">autor</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Novo autor (Enter para manter): "</span><span class="p">)</span>
+
+    <span class="n">novos_dados</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">titulo</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="n">novos_dados</span><span class="p">[</span><span class="s2">"titulo"</span><span class="p">]</span> <span class="o">=</span> <span class="n">titulo</span>
+    <span class="k">if</span> <span class="n">autor</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="n">novos_dados</span><span class="p">[</span><span class="s2">"autor"</span><span class="p">]</span> <span class="o">=</span> <span class="n">autor</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">editar_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">novos_dados</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Livro editado!"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">erro</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Erro: </span><span class="si">{</span><span class="n">erro</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
+
+  
+<div class="viewcode-block" id="remover_livro">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.remover_livro">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">remover_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Remove um livro do catálogo através do ISBN</span>
+
+<span class="sd">    :param livros: lista com todos os livros registados</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    :param isbn: ISBN do livro a remover</span>
+<span class="sd">    :type isbn: str</span>
+<span class="sd">    :return: True se o livro foi removido, False se não foi encontrado</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    """</span>
+    
+    <span class="n">isbn</span> <span class="o">=</span> <span class="n">limpar_isbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">livro</span> <span class="ow">in</span> <span class="n">livros</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">limpar_isbn</span><span class="p">(</span><span class="n">livro</span><span class="p">[</span><span class="s2">"isbn"</span><span class="p">])</span> <span class="o">==</span> <span class="n">isbn</span><span class="p">:</span>
+            <span class="n">livros</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">livro</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="menu_remover">
+<a class="viewcode-back" href="../../src.catalogo.html#src.catalogo.menu_remover">[documentos]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">menu_remover</span><span class="p">(</span><span class="n">livros</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">"""Pede o ISBN ao utilizador e remove o livro correspondente</span>
+
+<span class="sd">    :param livros: lista de livros do catálogo</span>
+<span class="sd">    :type livros: list</span>
+<span class="sd">    """</span>
+    
+    <span class="n">isbn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"ISBN do livro a remover: "</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">remover_livro</span><span class="p">(</span><span class="n">livros</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Livro removido!"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Erro: livro não encontrado."</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Biblioteca</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
+<p class="caption" role="heading"><span class="caption-text">Conteúdo:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">biblioteca</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Código do módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, João Pedro Balbino, Gonçalo Losada, Diogo Caetano, Kristian Saraiva.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
