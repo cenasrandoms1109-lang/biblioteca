@@ -1,5 +1,5 @@
 from src.menu import executar_menu
 
-if name == "main":
+if __name__ == "__main__":
     catalogo = []
     executar_menu(catalogo)
