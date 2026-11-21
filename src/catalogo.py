@@ -75,4 +75,27 @@ def menu_registar(livros):
         print("Livro registado!")
     except ValueError as erro:
         print(f"Erro: {erro}")
+
+
+def menu_editar(livros):
+    """Pede o ISBN do livro e insere os novos dados do mesmo atualizados(os campos deixados vazios não são alterados)
+
+    :param livros: lista de livros do catálogo
+    :type livros: list
+    """
+    isbn = input("ISBN do livro a editar: ")
+    titulo = input("Novo título (Enter para manter): ")
+    autor = input("Novo autor (Enter para manter): ")
+
+    novos_dados = {}
+    if titulo != "":
+        novos_dados["titulo"] = titulo
+    if autor != "":
+        novos_dados["autor"] = autor
+
+    try:
+        editar_livro(livros, isbn, novos_dados)
+        print("Livro editado!")
+    except ValueError as erro:
+        print(f"Erro: {erro}")
   
