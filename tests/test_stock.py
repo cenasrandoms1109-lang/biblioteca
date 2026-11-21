@@ -1,9 +1,16 @@
 import unittest
 
-from src.livro import Livro
 from src.stock import take_books_by_gender
 
-LIVROS = [Livro("222", "Memorial do Convento", "José Saramago", ["Romance", "Histórico"], 2)]
+LIVROS = [
+    {
+        "isbn": "222",
+        "titulo": "Memorial do Convento",
+        "autor": "José Saramago",
+        "generos": ["Romance", "Histórico"],
+        "quantidade": 2,
+    }
+]
 
 
 class TestGeneros(unittest.TestCase):
