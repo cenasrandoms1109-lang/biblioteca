@@ -1,5 +1,8 @@
+class Livro:
+    def __init__(self, titulo, isbn):
+        self.titulo = titulo
+        self.isbn = isbn
 from dataclasses import dataclass, field
-
 
 @dataclass
 class Livro:

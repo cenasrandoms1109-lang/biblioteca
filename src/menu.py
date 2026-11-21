@@ -1,3 +1,29 @@
+"""Menu principal da aplicação de gestão de biblioteca."""
+
+
+from src.catalogo import menu_registar, menu_editar, menu_remover
+from src.pesquisa import pesquisar_por_isbn
+from src.stock import stock_por_genero
+
+
+def menu_pesquisar_titulo(catalogo):
+    """Pede um título e mostra os livros encontrados."""
+    titulo = input("Título: ")
+    resultados = pesquisar_por_titulo(catalogo, titulo)
+    if not resultados:
+        print("Nenhum livro encontrado.")
+    for livro in resultados:
+        print(f"{livro['titulo']} - {livro['autor']}")
+
+def menu_pesquisar_autor(catalogo):
+    """Pede um autor e mostra os livros encontrados."""
+    autor = input("Autor: ")
+    resultados = pesquisar_por_autor(catalogo, autor)
+    if not resultados:
+        print("Nenhum livro encontrado.")
+    for livro in resultados:
+        print(f"{livro['titulo']} - {livro['autor']}")
+
 def menu_pesquisar_isbn(catalogo):
     isbn = input("ISBN: ")
     livro = pesquisar_por_isbn(catalogo, isbn)
@@ -6,10 +32,71 @@ def menu_pesquisar_isbn(catalogo):
     else:
         print("Livro não encontrado.")
 
-
 def menu_stock_por_genero(catalogo):
     totais = stock_por_genero(catalogo)
     if not totais:
         print("Sem livros no catálogo.")
     for genero, total in totais.items():
         print(f"{genero}: {total}")
+
+def menu_generos_livro(catalogo):
+    """Pede um ISBN e mostra os géneros desse livro."""
+    isbn = input("ISBN do livro: ")
+    try:
+        generos = generos_do_livro(catalogo, isbn)
+        print("Géneros: " + ", ".join(generos))
+    except ValueError as erro:
+        print(f"Erro: {erro}")
+
+def menu_listar_livros(catalogo):
+    """Mostra todos os livros do catálogo."""
+    if not catalogo:
+        print("Sem livros no catálogo.")
+    for livro in catalogo:
+        print(f"{livro['isbn']} | {livro['titulo']} - {livro['autor']}")
+        
+def mostrar_menu():
+    """Mostra as opções do menu."""
+    print("\n=== Biblioteca ===")
+    print("1. Registar livro")
+    print("2. Editar livro")
+    print("3. Remover livro")
+    print("4. Pesquisar por título")
+    print("5. Pesquisar por autor")
+    print("6. Pesquisar por ISBN")
+    print("7. Stock por género")
+    print("8. Géneros de um livro")
+    print("9. Listar livros")
+    print("0. Sair")
+
+def executar_menu(catalogo):
+    """Corre o menu até o utilizador escolher sair.
+
+    :param catalogo: lista de livros do catálogo
+    :type catalogo: list
+    """
+    while True:
+        mostrar_menu()
+        opcao = input("Opção: ")
+        if opcao == "1":
+            menu_registar(catalogo)
+        elif opcao == "2":
+            menu_editar(catalogo)
+        elif opcao == "3":
+            menu_remover(catalogo)
+        elif opcao == "4":
+            menu_pesquisar_titulo(catalogo)
+        elif opcao == "5":
+            menu_pesquisar_autor(catalogo)
+        elif opcao == "6":
+            menu_pesquisar_isbn(catalogo)
+        elif opcao == "7":
+            menu_stock_por_genero(catalogo)
+        elif opcao == "8":
+            menu_generos_livro(catalogo)
+        elif opcao == "9":
+            menu_listar_livros(catalogo)
+        elif opcao == "0":
+            break
+        else:
+            print("Opção inválida.")
