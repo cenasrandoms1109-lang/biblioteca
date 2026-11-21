@@ -2,11 +2,19 @@
 Operações sobre o catálogo de livros (registar, editar e remover)
 
 :Date: 16 Novembro 2026
-:Version: 1.0
+:Version: 1.1
 :Authors: João Pedro Balbino, Gonçalo Losada
 """
 
 def limpar_isbn(isbn):
+    """
+    Remove hífens e espaços de um ISBN
+
+    :param isbn: ISBN tal como foi escrito pelo utilizador
+    :type isbn: str
+    :return: ISBN só com dígitos
+    :rtype: str
+    """
     return isbn.replace("-", "").replace(" ", "")
 
 def registar_livro(livros, livro):
@@ -27,6 +35,7 @@ def registar_livro(livros, livro):
         raise ValueError("O autor é obrigatório.")
     
     isbn = livro["isbn"].replace("-", "").replace(" ", "")
+    
     if not (isbn.isdigit() and len(isbn) in (10, 13)):
         raise ValueError("O ISBN deve ter 10 ou 13 dígitos.")
     
@@ -35,6 +44,7 @@ def registar_livro(livros, livro):
             raise ValueError("Já existe um livro com esse ISBN.")
         
     livros.append(livro)
+    
 
 
 def editar_livro(livros, isbn, novos_dados):
@@ -106,16 +116,35 @@ def menu_editar(livros):
     except ValueError as erro:
         print(f"Erro: {erro}")
   
-  
 def remover_livro(livros, isbn):
+    
+    """
+    Remove um livro do catálogo através do ISBN
+
+    :param livros: lista com todos os livros registados
+    :type livros: list
+    :param isbn: ISBN do livro a remover
+    :type isbn: str
+    :return: True se o livro foi removido, False se não foi encontrado
+    :rtype: bool
+    """
+    
+    isbn = limpar_isbn(isbn)
     for livro in livros:
-        if livro["isbn"] == isbn:
+        if limpar_isbn(livro["isbn"]) == isbn:
             livros.remove(livro)
             return True
     return False
 
 
 def menu_remover(livros):
+    
+    """Pede o ISBN ao utilizador e remove o livro correspondente
+
+    :param livros: lista de livros do catálogo
+    :type livros: list
+    """
+    
     isbn = input("ISBN do livro a remover: ")
     if remover_livro(livros, isbn):
         print("Livro removido!")
