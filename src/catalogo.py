@@ -137,6 +137,12 @@ def remover_livro(livros, isbn):
 
 
 def menu_remover(livros):
+    """Pede o ISBN ao utilizador e remove o livro correspondente
+
+    :param livros: lista de livros do catálogo
+    :type livros: list
+    """
+    
     isbn = input("ISBN do livro a remover: ")
     if remover_livro(livros, isbn):
         print("Livro removido!")
