@@ -2,12 +2,11 @@
 Testes das operações do catálogo de livros.
 
 :Date: 16 Novembro 2026
-:Authors: João Pedro Balbino
+:Authors: João Pedro Balbino, Gonçalo Losada
 """
 
 import unittest
-from src.catalogo import registar_livro
-from src.catalogo import registar_livro, editar_livro
+from src.catalogo import registar_livro, editar_livro, remover_livro
 
 
 class TestRegistarLivro(unittest.TestCase):
@@ -21,7 +20,12 @@ class TestRegistarLivro(unittest.TestCase):
     def test_titulo_vazio(self):
         livros = []
         with self.assertRaises(ValueError): registar_livro(livros, {"titulo": "", "autor": "Machado de Assis", "isbn": "9780306406157"})
-
+    
+    def test_isbn_duplicado(self):
+        livros = []
+        registar_livro(livros, {"titulo": "A", "autor": "B", "isbn": "9780306406157"})
+        with self.assertRaises(ValueError):
+            registar_livro(livros, {"titulo": "C", "autor": "D", "isbn": "9780306406157"})
 
 
 
@@ -53,3 +57,12 @@ class  TestEditarLivro(unittest.TestCase):
         livros = self.criar_livros()
         with self.assertRaises(ValueError):
             editar_livro(livros, "9780306406157", {"titulo": ""})
+    
+class TestRemoverLivro(unittest.TestCase):
+    def test_remover_existente(self):
+        livros = [{"titulo": "A", "autor": "B", "isbn": "9780306406157"}]
+        self.assertTrue(remover_livro(livros, "9780306406157"))
+        self.assertEqual(len(livros), 0)
+
+    def test_remover_inexistente(self):
+        self.assertFalse(remover_livro([], "9780306406157"))
