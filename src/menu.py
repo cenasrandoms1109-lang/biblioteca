@@ -47,3 +47,16 @@ def menu_generos_livro(catalogo):
         print("Géneros: " + ", ".join(generos))
     except ValueError as erro:
         print(f"Erro: {erro}")
+        
+def mostrar_menu():
+    """Mostra as opções do menu."""
+    print("\n=== Biblioteca ===")
+    print("1. Registar livro")
+    print("2. Editar livro")
+    print("3. Remover livro")
+    print("4. Pesquisar por título")
+    print("5. Pesquisar por autor")
+    print("6. Pesquisar por ISBN")
+    print("7. Stock por género")
+    print("8. Géneros de um livro")
+    print("0. Sair")
