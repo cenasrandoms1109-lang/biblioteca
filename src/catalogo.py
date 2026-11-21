@@ -117,6 +117,7 @@ def menu_editar(livros):
         print(f"Erro: {erro}")
   
 def remover_livro(livros, isbn):
+    
     """
     Remove um livro do catálogo através do ISBN
 
@@ -137,6 +138,7 @@ def remover_livro(livros, isbn):
 
 
 def menu_remover(livros):
+    
     """Pede o ISBN ao utilizador e remove o livro correspondente
 
     :param livros: lista de livros do catálogo
